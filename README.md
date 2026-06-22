@@ -1,4 +1,4 @@
-# Pointer-Driven Log Analyzer: Systems Programming Learning Project
+# Pointer-Driven Log Analyzer
 
 A foundational systems programming project designed to explore low-level memory management, pointer manipulation, and data aggregation structures in modern **C++17**. 
 
