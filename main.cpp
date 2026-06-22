@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <unordered_map>
+#include<vector>
 #include <map>
 #include <chrono>
 
@@ -30,15 +31,14 @@ public:
         
         while (getline(file, line)) {
             total_lines++;
-
             
             char* p = &line[0];
             
             char* ip_start = p;
             while (*p != '\0' && *p != ' ') {
-                p++;
+                p++; 
             }
-            
+        
             if (*p == ' ') {
                 *p = '\0'; 
                 p++;       
@@ -53,8 +53,9 @@ public:
                 }
                 scan++;
             }
-
+            
             if (quote_ptr != nullptr) {
+                
                 p = quote_ptr + 2; 
                 char* status_start = p;
 
@@ -85,9 +86,14 @@ public:
         for (const auto& [status, count] : status_counts) {
             cout << "  Code " << status << ": " << count << " times" << endl;
         }
+        
+        vector<pair<string, size_t>> ip_vector(ip_counts.begin(), ip_counts.end());
+        sort(ip_vector.begin(), ip_vector.end(), [](const auto& a, const auto& b){
+            return a.second>b.second;
+        });
 
         cout << "\n[Top Traffic IP Addresses]:" << endl;
-        for (const auto& [ip, count] : ip_counts) {
+        for (const auto& [ip, count] : ip_vector) {
             cout << "  IP " << ip << ": " << count << " requests" << endl;
         }
         cout << "==================================================" << endl;
